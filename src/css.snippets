@@ -1,0 +1,106 @@
+=== CSS helpers
+
+--- Visually hidden class :: a11y-visually-hidden
+Hides content visually but keeps it for screen readers; shows it again when focused.
+.visually-hidden:not(:focus):not(:active) {
+  clip-path: inset(50%);
+  height: 1px;
+  overflow: hidden;
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
+}
+
+--- Skip link styles :: a11y-skip-css
+Keeps the skip link off-screen until it receives keyboard focus.
+.skip-link {
+  background: ${1:#000};
+  color: ${2:#fff};
+  inset-block-start: 1rem;
+  inset-inline-start: 1rem;
+  padding: 0.75rem 1rem;
+  position: absolute;
+  transform: translateY(-200%);
+  z-index: 100;
+}
+
+.skip-link:focus {
+  transform: none;
+}
+
+--- Focus ring :: a11y-focus
+Visible focus indicator for keyboard users only (WCAG 2.4.7).
+:focus-visible {
+  outline: ${1:3px} solid ${2:currentColor};
+  outline-offset: ${3:2px};
+}
+
+--- Reduced motion :: a11y-reduced-motion
+Turns off animation and smooth scrolling for users who ask for less motion.
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+--- Forced colors :: a11y-forced-colors
+Restores borders that Windows High Contrast mode would otherwise remove.
+@media (forced-colors: active) {
+  ${1:.button} {
+    border: 1px solid ButtonText;
+  }
+}
+
+--- Target size :: a11y-target-size
+Minimum 24 by 24 px pointer targets (WCAG 2.5.8).
+${1:button, [role="button"], input[type="checkbox"], input[type="radio"]} {
+  min-block-size: 24px;
+  min-inline-size: 24px;
+}
+
+--- Accessibility base styles :: a11y-base-css
+Visually hidden class, skip link, focus ring and reduced motion in one block.
+.visually-hidden:not(:focus):not(:active) {
+  clip-path: inset(50%);
+  height: 1px;
+  overflow: hidden;
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
+}
+
+.skip-link {
+  background: ${1:#000};
+  color: ${2:#fff};
+  inset-block-start: 1rem;
+  inset-inline-start: 1rem;
+  padding: 0.75rem 1rem;
+  position: absolute;
+  transform: translateY(-200%);
+  z-index: 100;
+}
+
+.skip-link:focus {
+  transform: none;
+}
+
+:focus-visible {
+  outline: 3px solid currentColor;
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+}

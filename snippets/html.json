@@ -1,0 +1,599 @@
+{
+	"Semantic page": {
+		"prefix": [
+			"a11y-page",
+			"html5s"
+		],
+		"body": [
+			"<!DOCTYPE html>",
+			"<html lang=\"${1:en}\">",
+			"<head>",
+			"\t<meta charset=\"UTF-8\">",
+			"\t<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">",
+			"\t<title>${2:Page title}</title>",
+			"\t<meta name=\"description\" content=\"${3:Page description}\">",
+			"</head>",
+			"<body>",
+			"\t<a class=\"skip-link\" href=\"#main\">Skip to main content</a>",
+			"\t<header class=\"site-header\">",
+			"\t\t<a href=\"/\" class=\"site-logo\">${4:Site name}</a>",
+			"\t\t<nav aria-label=\"Primary\">",
+			"\t\t\t<ul>",
+			"\t\t\t\t<li><a href=\"/\" aria-current=\"page\">Home</a></li>",
+			"\t\t\t\t<li><a href=\"${5:/about}\">${6:About}</a></li>",
+			"\t\t\t</ul>",
+			"\t\t</nav>",
+			"\t</header>",
+			"\t<main id=\"main\">",
+			"\t\t<h1>${7:Page heading}</h1>",
+			"\t\t$0",
+			"\t</main>",
+			"\t<footer class=\"site-footer\">",
+			"\t\t<p><small>&copy; ${CURRENT_YEAR} ${4}</small></p>",
+			"\t</footer>",
+			"</body>",
+			"</html>"
+		],
+		"description": "Full HTML5 page: lang, viewport without zoom lock, skip link, header/nav/main/footer landmarks and one h1."
+	},
+	"Skip link": {
+		"prefix": "a11y-skip",
+		"body": [
+			"<a class=\"skip-link\" href=\"#${1:main}\">${2:Skip to main content}</a>"
+		],
+		"description": "First focusable element on the page; jumps keyboard users past repeated navigation (WCAG 2.4.1)."
+	},
+	"Site header": {
+		"prefix": "a11y-header",
+		"body": [
+			"<header class=\"site-header\">",
+			"\t<a href=\"/\" class=\"site-logo\">${1:Site name}</a>",
+			"\t<nav aria-label=\"${2:Primary}\">",
+			"\t\t<ul>",
+			"\t\t\t<li><a href=\"/\" aria-current=\"page\">${3:Home}</a></li>",
+			"\t\t\t<li><a href=\"${4:/about}\">${5:About}</a></li>",
+			"\t\t</ul>",
+			"\t</nav>",
+			"</header>"
+		],
+		"description": "Site header landmark with a home link and labelled primary navigation."
+	},
+	"Navigation": {
+		"prefix": "a11y-nav",
+		"body": [
+			"<nav aria-label=\"${1:Primary}\">",
+			"\t<ul>",
+			"\t\t<li><a href=\"${2:/}\" aria-current=\"page\">${3:Home}</a></li>",
+			"\t\t<li><a href=\"${4:/about}\">${5:About}</a></li>",
+			"\t\t<li><a href=\"${6:/contact}\">${7:Contact}</a></li>",
+			"\t</ul>",
+			"</nav>"
+		],
+		"description": "Labelled nav landmark; aria-current marks the current page."
+	},
+	"Breadcrumb": {
+		"prefix": "a11y-breadcrumb",
+		"body": [
+			"<nav aria-label=\"Breadcrumb\">",
+			"\t<ol>",
+			"\t\t<li><a href=\"/\">${1:Home}</a></li>",
+			"\t\t<li><a href=\"${2:/section}\">${3:Section}</a></li>",
+			"\t\t<li><a href=\"${4:/section/page}\" aria-current=\"page\">${5:Current page}</a></li>",
+			"\t</ol>",
+			"</nav>"
+		],
+		"description": "Breadcrumb nav as an ordered list; the last item carries aria-current=\"page\"."
+	},
+	"Main": {
+		"prefix": "a11y-main",
+		"body": [
+			"<main id=\"main\">",
+			"\t<h1>${1:Page heading}</h1>",
+			"\t$0",
+			"</main>"
+		],
+		"description": "Main landmark with the page's single h1; id=\"main\" is the skip link target."
+	},
+	"Section": {
+		"prefix": "a11y-section",
+		"body": [
+			"<section aria-labelledby=\"${1:section}-title\">",
+			"\t<h2 id=\"${1}-title\">${2:Section heading}</h2>",
+			"\t$0",
+			"</section>"
+		],
+		"description": "Section named by its heading, so it is exposed as a region landmark."
+	},
+	"Article": {
+		"prefix": "a11y-article",
+		"body": [
+			"<article>",
+			"\t<header>",
+			"\t\t<h2>${1:Article title}</h2>",
+			"\t\t<p><time datetime=\"${CURRENT_YEAR}-${CURRENT_MONTH}-${CURRENT_DATE}\">${CURRENT_DATE} ${CURRENT_MONTH_NAME} ${CURRENT_YEAR}</time> by <a href=\"${2:/author}\" rel=\"author\">${3:Author name}</a></p>",
+			"\t</header>",
+			"\t<p>${4:Article content}</p>",
+			"</article>"
+		],
+		"description": "Self-contained article with heading, machine-readable date and author link."
+	},
+	"Aside": {
+		"prefix": "a11y-aside",
+		"body": [
+			"<aside aria-labelledby=\"${1:related}-title\">",
+			"\t<h2 id=\"${1}-title\">${2:Related content}</h2>",
+			"\t$0",
+			"</aside>"
+		],
+		"description": "Complementary landmark named by its heading."
+	},
+	"Site footer": {
+		"prefix": "a11y-footer",
+		"body": [
+			"<footer class=\"site-footer\">",
+			"\t<nav aria-label=\"Footer\">",
+			"\t\t<ul>",
+			"\t\t\t<li><a href=\"${1:/privacy}\">${2:Privacy policy}</a></li>",
+			"\t\t\t<li><a href=\"${3:/accessibility}\">${4:Accessibility statement}</a></li>",
+			"\t\t</ul>",
+			"\t</nav>",
+			"\t<p><small>&copy; ${CURRENT_YEAR} ${5:Site name}</small></p>",
+			"</footer>"
+		],
+		"description": "Footer landmark with a labelled footer nav and accessibility statement link."
+	},
+	"Search": {
+		"prefix": "a11y-search",
+		"body": [
+			"<search>",
+			"\t<form action=\"${1:/search}\" method=\"get\">",
+			"\t\t<label for=\"${2:site-search}\">${3:Search the site}</label>",
+			"\t\t<input type=\"search\" id=\"${2}\" name=\"${4:q}\">",
+			"\t\t<button type=\"submit\">${5:Search}</button>",
+			"\t</form>",
+			"</search>"
+		],
+		"description": "Native search landmark with a visible label and submit button."
+	},
+	"Screen-reader-only text": {
+		"prefix": "a11y-sr",
+		"body": [
+			"<span class=\"visually-hidden\">${1:Text for screen reader users}</span>"
+		],
+		"description": "Text read by screen readers but hidden visually. Needs the a11y-visually-hidden CSS."
+	},
+	"Image": {
+		"prefix": "a11y-img",
+		"body": [
+			"<img src=\"${1:image.jpg}\" alt=\"${2:Describe what the image shows}\" width=\"${3:800}\" height=\"${4:600}\" loading=\"lazy\" decoding=\"async\">"
+		],
+		"description": "Informative image with alt text and dimensions to prevent layout shift."
+	},
+	"Decorative image": {
+		"prefix": "a11y-img-deco",
+		"body": [
+			"<img src=\"${1:decoration.svg}\" alt=\"\" width=\"${2:24}\" height=\"${3:24}\">"
+		],
+		"description": "Decorative image with empty alt so screen readers skip it."
+	},
+	"Figure": {
+		"prefix": "a11y-figure",
+		"body": [
+			"<figure>",
+			"\t<img src=\"${1:image.jpg}\" alt=\"${2:Describe what the image shows}\" width=\"${3:800}\" height=\"${4:600}\" loading=\"lazy\" decoding=\"async\">",
+			"\t<figcaption>${5:Caption}</figcaption>",
+			"</figure>"
+		],
+		"description": "Image with a visible caption."
+	},
+	"Quote": {
+		"prefix": "a11y-quote",
+		"body": [
+			"<figure>",
+			"\t<blockquote cite=\"${1:https://example.com/source}\">",
+			"\t\t<p>${2:Quoted text}</p>",
+			"\t</blockquote>",
+			"\t<figcaption>${3:Author name}, <cite>${4:Source title}</cite></figcaption>",
+			"</figure>"
+		],
+		"description": "Blockquote with source and attribution in a figure."
+	},
+	"Data table": {
+		"prefix": "a11y-table",
+		"body": [
+			"<table>",
+			"\t<caption>${1:Table caption}</caption>",
+			"\t<thead>",
+			"\t\t<tr>",
+			"\t\t\t<th scope=\"col\">${2:Item}</th>",
+			"\t\t\t<th scope=\"col\">${3:Value}</th>",
+			"\t\t</tr>",
+			"\t</thead>",
+			"\t<tbody>",
+			"\t\t<tr>",
+			"\t\t\t<th scope=\"row\">${4:Row heading}</th>",
+			"\t\t\t<td>${5:Data}</td>",
+			"\t\t</tr>",
+			"\t</tbody>",
+			"</table>"
+		],
+		"description": "Table with caption and scoped column and row headers."
+	},
+	"Description list": {
+		"prefix": "a11y-dl",
+		"body": [
+			"<dl>",
+			"\t<dt>${1:Term}</dt>",
+			"\t<dd>${2:Description}</dd>",
+			"</dl>"
+		],
+		"description": "Term and description pairs."
+	},
+	"Details": {
+		"prefix": "a11y-details",
+		"body": [
+			"<details>",
+			"\t<summary>${1:Summary}</summary>",
+			"\t<p>${2:More details}</p>",
+			"</details>"
+		],
+		"description": "Native disclosure widget; keyboard and screen reader support built in, no JS."
+	},
+	"Time": {
+		"prefix": "a11y-time",
+		"body": [
+			"<time datetime=\"${1:${CURRENT_YEAR}-${CURRENT_MONTH}-${CURRENT_DATE}}\">${2:${CURRENT_DATE} ${CURRENT_MONTH_NAME} ${CURRENT_YEAR}}</time>"
+		],
+		"description": "Date with a machine-readable datetime value (defaults to today)."
+	},
+	"Abbreviation": {
+		"prefix": "a11y-abbr",
+		"body": [
+			"<abbr title=\"${1:World Wide Web Consortium}\">${2:W3C}</abbr>"
+		],
+		"description": "Abbreviation with its expansion."
+	},
+	"Language change": {
+		"prefix": "a11y-lang",
+		"body": [
+			"<span lang=\"${1:fr}\">${2:Bonjour}</span>"
+		],
+		"description": "Marks a phrase in another language so screen readers switch pronunciation (WCAG 3.1.2)."
+	},
+	"Contact address": {
+		"prefix": "a11y-address",
+		"body": [
+			"<address>",
+			"\t<a href=\"mailto:${1:hello@example.com}\">${1}</a><br>",
+			"\t<a href=\"tel:${2:+910000000000}\">${2}</a>",
+			"</address>"
+		],
+		"description": "Contact details for the page or article owner."
+	},
+	"Card": {
+		"prefix": "a11y-card",
+		"body": [
+			"<article class=\"card\">",
+			"\t<h3 class=\"card-title\"><a href=\"${1:/post}\">${2:Card title}</a></h3>",
+			"\t<p>${3:Short summary}</p>",
+			"</article>"
+		],
+		"description": "Card with one link on the heading, so screen readers hear the link once."
+	},
+	"New-tab link": {
+		"prefix": "a11y-link-new-tab",
+		"body": [
+			"<a href=\"${1:https://example.com}\" target=\"_blank\" rel=\"noopener\">${2:Link text}<span class=\"visually-hidden\"> (opens in a new tab)</span></a>"
+		],
+		"description": "Link that opens a new tab and says so to screen reader users."
+	},
+	"Icon button": {
+		"prefix": "a11y-icon-btn",
+		"body": [
+			"<button type=\"button\" class=\"icon-button\">",
+			"\t<svg aria-hidden=\"true\" focusable=\"false\" viewBox=\"0 0 24 24\" width=\"24\" height=\"24\"><use href=\"#${1:icon-close}\"></use></svg>",
+			"\t<span class=\"visually-hidden\">${2:Close}</span>",
+			"</button>"
+		],
+		"description": "Icon-only button with a hidden text label and a hidden icon."
+	},
+	"Decorative SVG": {
+		"prefix": "a11y-svg-deco",
+		"body": [
+			"<svg aria-hidden=\"true\" focusable=\"false\" viewBox=\"0 0 24 24\" width=\"24\" height=\"24\">$0</svg>"
+		],
+		"description": "Inline SVG hidden from assistive tech."
+	},
+	"Meaningful SVG": {
+		"prefix": "a11y-svg",
+		"body": [
+			"<svg role=\"img\" aria-labelledby=\"${1:graphic}-title\" viewBox=\"0 0 ${2:24} ${3:24}\" width=\"${2}\" height=\"${3}\">",
+			"\t<title id=\"${1}-title\">${4:Describe the graphic}</title>",
+			"\t$0",
+			"</svg>"
+		],
+		"description": "Inline SVG exposed as an image with an accessible name."
+	},
+	"Video": {
+		"prefix": "a11y-video",
+		"body": [
+			"<video controls preload=\"metadata\" width=\"${1:1280}\" height=\"${2:720}\" poster=\"${3:poster.jpg}\">",
+			"\t<source src=\"${4:video.mp4}\" type=\"video/mp4\">",
+			"\t<track kind=\"captions\" src=\"${5:captions.en.vtt}\" srclang=\"${6:en}\" label=\"${7:English}\" default>",
+			"\t<p>Your browser can't play this video. <a href=\"${4}\">Download the video</a>.</p>",
+			"</video>",
+			"<p><a href=\"${8:#transcript}\">Read the transcript</a></p>"
+		],
+		"description": "Video with captions track, fallback download link and transcript link."
+	},
+	"Audio": {
+		"prefix": "a11y-audio",
+		"body": [
+			"<figure>",
+			"\t<figcaption>${1:Audio title}</figcaption>",
+			"\t<audio controls preload=\"metadata\" src=\"${2:audio.mp3}\"></audio>",
+			"\t<p><a href=\"${3:#transcript}\">Read the transcript</a></p>",
+			"</figure>"
+		],
+		"description": "Audio player with a title and transcript link."
+	},
+	"Iframe": {
+		"prefix": "a11y-iframe",
+		"body": [
+			"<iframe src=\"${1:https://example.com/embed}\" title=\"${2:Describe the embedded content}\" width=\"${3:560}\" height=\"${4:315}\" loading=\"lazy\" allowfullscreen></iframe>"
+		],
+		"description": "Embedded frame with a descriptive title."
+	},
+	"Form": {
+		"prefix": "a11y-form",
+		"body": [
+			"<form action=\"${1:/submit}\" method=\"${2|post,get|}\">",
+			"\t<p>${3:All fields are required unless marked optional.}</p>",
+			"\t$0",
+			"\t<button type=\"submit\">${4:Submit}</button>",
+			"</form>"
+		],
+		"description": "Form shell with instructions and an explicit submit button."
+	},
+	"Text input": {
+		"prefix": "a11y-input",
+		"body": [
+			"<div class=\"field\">",
+			"\t<label for=\"${1:full-name}\">${2:Full name}</label>",
+			"\t<p id=\"${1}-hint\" class=\"hint\">${3:As it appears on your ID}</p>",
+			"\t<input type=\"${4|text,tel,url,number,date|}\" id=\"${1}\" name=\"${1}\" autocomplete=\"${5|name,given-name,family-name,tel,organization,street-address,postal-code,url,off|}\" aria-describedby=\"${1}-hint\">",
+			"</div>"
+		],
+		"description": "Labelled input with hint text and autocomplete for input purpose (WCAG 1.3.5)."
+	},
+	"Email input": {
+		"prefix": "a11y-email",
+		"body": [
+			"<div class=\"field\">",
+			"\t<label for=\"${1:email}\">${2:Email address}</label>",
+			"\t<input type=\"email\" id=\"${1}\" name=\"${1}\" autocomplete=\"email\" spellcheck=\"false\" required>",
+			"</div>"
+		],
+		"description": "Required email field with autocomplete."
+	},
+	"Password input": {
+		"prefix": "a11y-password",
+		"body": [
+			"<div class=\"field\">",
+			"\t<label for=\"${1:password}\">${2:Password}</label>",
+			"\t<p id=\"${1}-hint\" class=\"hint\">${3:Use 12 or more characters.}</p>",
+			"\t<input type=\"password\" id=\"${1}\" name=\"${1}\" autocomplete=\"${4|current-password,new-password|}\" aria-describedby=\"${1}-hint\" required>",
+			"</div>"
+		],
+		"description": "Password field with hint and correct autocomplete for password managers."
+	},
+	"Textarea": {
+		"prefix": "a11y-textarea",
+		"body": [
+			"<div class=\"field\">",
+			"\t<label for=\"${1:message}\">${2:Message}</label>",
+			"\t<textarea id=\"${1}\" name=\"${1}\" rows=\"${3:5}\"></textarea>",
+			"</div>"
+		],
+		"description": "Labelled multi-line text field."
+	},
+	"Select": {
+		"prefix": "a11y-select",
+		"body": [
+			"<div class=\"field\">",
+			"\t<label for=\"${1:topic}\">${2:Topic}</label>",
+			"\t<select id=\"${1}\" name=\"${1}\">",
+			"\t\t<option value=\"\">${3:Choose a topic}</option>",
+			"\t\t<option value=\"${4:general}\">${5:General question}</option>",
+			"\t</select>",
+			"</div>"
+		],
+		"description": "Labelled select with a placeholder option."
+	},
+	"Checkbox": {
+		"prefix": "a11y-checkbox",
+		"body": [
+			"<div class=\"field\">",
+			"\t<input type=\"checkbox\" id=\"${1:agree}\" name=\"${1}\" value=\"${2:yes}\">",
+			"\t<label for=\"${1}\">${3:I agree to the terms}</label>",
+			"</div>"
+		],
+		"description": "Single checkbox with its label after the control."
+	},
+	"Checkbox group": {
+		"prefix": "a11y-checkboxes",
+		"body": [
+			"<fieldset>",
+			"\t<legend>${1:Which topics interest you?}</legend>",
+			"\t<div>",
+			"\t\t<input type=\"checkbox\" id=\"${2:topics}-1\" name=\"${2}[]\" value=\"${3:design}\">",
+			"\t\t<label for=\"${2}-1\">${4:Design}</label>",
+			"\t</div>",
+			"\t<div>",
+			"\t\t<input type=\"checkbox\" id=\"${2}-2\" name=\"${2}[]\" value=\"${5:development}\">",
+			"\t\t<label for=\"${2}-2\">${6:Development}</label>",
+			"\t</div>",
+			"</fieldset>"
+		],
+		"description": "Related checkboxes grouped by fieldset and legend; name[] submits every checked value."
+	},
+	"Radio group": {
+		"prefix": "a11y-radios",
+		"body": [
+			"<fieldset>",
+			"\t<legend>${1:How should we contact you?}</legend>",
+			"\t<div>",
+			"\t\t<input type=\"radio\" id=\"${2:contact}-1\" name=\"${2}\" value=\"${3:email}\">",
+			"\t\t<label for=\"${2}-1\">${4:Email}</label>",
+			"\t</div>",
+			"\t<div>",
+			"\t\t<input type=\"radio\" id=\"${2}-2\" name=\"${2}\" value=\"${5:phone}\">",
+			"\t\t<label for=\"${2}-2\">${6:Phone}</label>",
+			"\t</div>",
+			"</fieldset>"
+		],
+		"description": "Radio buttons grouped by fieldset and legend."
+	},
+	"Field with error": {
+		"prefix": "a11y-input-error",
+		"body": [
+			"<div class=\"field field-error\">",
+			"\t<label for=\"${1:email}\">${2:Email address}</label>",
+			"\t<p id=\"${1}-error\" class=\"error-message\"><span class=\"visually-hidden\">Error:</span> ${3:Enter an email address like name@example.com}</p>",
+			"\t<input type=\"${4:email}\" id=\"${1}\" name=\"${1}\" aria-invalid=\"true\" aria-describedby=\"${1}-error\">",
+			"</div>"
+		],
+		"description": "Invalid field: aria-invalid plus an error message linked by aria-describedby (WCAG 3.3.1)."
+	},
+	"Error summary": {
+		"prefix": "a11y-error-summary",
+		"body": [
+			"<div class=\"error-summary\" tabindex=\"-1\">",
+			"\t<h2>${1:There is a problem}</h2>",
+			"\t<ul>",
+			"\t\t<li><a href=\"#${2:email}\">${3:Enter an email address}</a></li>",
+			"\t</ul>",
+			"</div>"
+		],
+		"description": "List of errors linking to each field. Move focus here after a failed submit."
+	},
+	"Progress": {
+		"prefix": "a11y-progress",
+		"body": [
+			"<label for=\"${1:upload-progress}\">${2:Upload progress}</label>",
+			"<progress id=\"${1}\" max=\"100\" value=\"${3:40}\">${3}%</progress>"
+		],
+		"description": "Labelled progress bar with a text fallback."
+	},
+	"Dialog": {
+		"prefix": "a11y-dialog",
+		"body": [
+			"<button type=\"button\" commandfor=\"${1:dialog}\" command=\"show-modal\">${2:Open dialog}</button>",
+			"<dialog id=\"${1}\" aria-labelledby=\"${1}-title\">",
+			"\t<h2 id=\"${1}-title\">${3:Dialog title}</h2>",
+			"\t<p>${4:Dialog content}</p>",
+			"\t<form method=\"dialog\">",
+			"\t\t<button type=\"submit\">${5:Close}</button>",
+			"\t</form>",
+			"</dialog>"
+		],
+		"description": "Native modal dialog opened with commandfor (no JS); focus trap and Escape built in."
+	},
+	"Disclosure": {
+		"prefix": "a11y-disclosure",
+		"body": [
+			"<button type=\"button\" aria-expanded=\"false\" aria-controls=\"${1:more-info}\">${2:Show more}</button>",
+			"<div id=\"${1}\" hidden>",
+			"\t<p>${3:Hidden content}</p>",
+			"</div>"
+		],
+		"description": "Show/hide button with aria-expanded. Pair with a11y-disclosure-js."
+	},
+	"Mobile menu toggle": {
+		"prefix": "a11y-nav-toggle",
+		"body": [
+			"<nav aria-label=\"${1:Primary}\">",
+			"\t<button type=\"button\" aria-expanded=\"false\" aria-controls=\"${2:primary-menu}\">${3:Menu}</button>",
+			"\t<ul id=\"${2}\" hidden>",
+			"\t\t<li><a href=\"/\" aria-current=\"page\">Home</a></li>",
+			"\t\t<li><a href=\"${4:/about}\">${5:About}</a></li>",
+			"\t</ul>",
+			"</nav>"
+		],
+		"description": "Navigation with a menu button using aria-expanded. Pair with a11y-disclosure-js."
+	},
+	"Accordion item": {
+		"prefix": "a11y-accordion",
+		"body": [
+			"<div class=\"accordion\">",
+			"\t<h3>",
+			"\t\t<button type=\"button\" aria-expanded=\"false\" aria-controls=\"${1:faq}-panel-1\">${2:Question}</button>",
+			"\t</h3>",
+			"\t<div id=\"${1}-panel-1\" hidden>",
+			"\t\t<p>${3:Answer}</p>",
+			"\t</div>",
+			"</div>"
+		],
+		"description": "Accordion section: heading wrapping an aria-expanded button. Pair with a11y-disclosure-js."
+	},
+	"Tabs": {
+		"prefix": "a11y-tabs",
+		"body": [
+			"<div class=\"tabs\">",
+			"\t<div role=\"tablist\" aria-label=\"${1:Product details}\">",
+			"\t\t<button type=\"button\" role=\"tab\" id=\"${2:tab}-1\" aria-selected=\"true\" aria-controls=\"${2}-panel-1\">${3:Overview}</button>",
+			"\t\t<button type=\"button\" role=\"tab\" id=\"${2}-2\" aria-selected=\"false\" aria-controls=\"${2}-panel-2\" tabindex=\"-1\">${4:Specs}</button>",
+			"\t</div>",
+			"\t<div role=\"tabpanel\" id=\"${2}-panel-1\" aria-labelledby=\"${2}-1\" tabindex=\"0\">",
+			"\t\t<p>${5:Overview content}</p>",
+			"\t</div>",
+			"\t<div role=\"tabpanel\" id=\"${2}-panel-2\" aria-labelledby=\"${2}-2\" tabindex=\"0\" hidden>",
+			"\t\t<p>${6:Specs content}</p>",
+			"\t</div>",
+			"</div>"
+		],
+		"description": "ARIA tabs with roving tabindex. Pair with a11y-tabs-js for arrow-key support."
+	},
+	"Toggle button": {
+		"prefix": "a11y-toggle",
+		"body": [
+			"<button type=\"button\" aria-pressed=\"false\">${1:Mute}</button>"
+		],
+		"description": "On/off button using aria-pressed. Pair with a11y-toggle-js."
+	},
+	"Switch": {
+		"prefix": "a11y-switch",
+		"body": [
+			"<button type=\"button\" role=\"switch\" aria-checked=\"false\">${1:Dark mode}</button>"
+		],
+		"description": "On/off switch using role=\"switch\". Pair with a11y-toggle-js."
+	},
+	"Pagination": {
+		"prefix": "a11y-pagination",
+		"body": [
+			"<nav aria-label=\"${1:Pagination}\">",
+			"\t<ul>",
+			"\t\t<li><a href=\"${2:?page=1}\">Previous<span class=\"visually-hidden\"> page</span></a></li>",
+			"\t\t<li><a href=\"?page=1\" aria-current=\"page\"><span class=\"visually-hidden\">Page </span>1</a></li>",
+			"\t\t<li><a href=\"?page=2\"><span class=\"visually-hidden\">Page </span>2</a></li>",
+			"\t\t<li><a href=\"${3:?page=2}\">Next<span class=\"visually-hidden\"> page</span></a></li>",
+			"\t</ul>",
+			"</nav>"
+		],
+		"description": "Labelled pagination with the current page marked and context for screen readers."
+	},
+	"Status message": {
+		"prefix": "a11y-status",
+		"body": [
+			"<div role=\"status\">$0</div>"
+		],
+		"description": "Polite live region (WCAG 4.1.3). Keep it in the page on load, then inject text."
+	},
+	"Alert": {
+		"prefix": "a11y-alert",
+		"body": [
+			"<div role=\"alert\">$0</div>"
+		],
+		"description": "Assertive live region for urgent messages. Keep it in the page on load, then inject text."
+	}
+}

@@ -1,0 +1,84 @@
+{
+	"name": "semantic-a11y-snippets",
+	"displayName": "Semantic A11y Snippets",
+	"description": "Semantic, accessible HTML snippets: landmark page boilerplate, labelled forms, ARIA widgets and captioned media, plus a11y CSS and JS helpers.",
+	"version": "1.0.0",
+	"publisher": "akshat009",
+	"author": {
+		"name": "Akshat Saxena"
+	},
+	"license": "MIT",
+	"pricing": "Free",
+	"icon": "images/icon.png",
+	"galleryBanner": {
+		"color": "#14213D",
+		"theme": "dark"
+	},
+	"engines": {
+		"vscode": "^1.75.0"
+	},
+	"categories": [
+		"Snippets"
+	],
+	"keywords": [
+		"accessibility",
+		"a11y",
+		"wcag",
+		"aria",
+		"semantic",
+		"html",
+		"html5",
+		"boilerplate",
+		"landmarks",
+		"forms",
+		"snippets",
+		"wordpress"
+	],
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/akshat009/semantic-a11y-snippets.git"
+	},
+	"bugs": {
+		"url": "https://github.com/akshat009/semantic-a11y-snippets/issues"
+	},
+	"homepage": "https://github.com/akshat009/semantic-a11y-snippets#readme",
+	"contributes": {
+		"snippets": [
+			{
+				"language": "html",
+				"path": "./snippets/html.json"
+			},
+			{
+				"language": "php",
+				"path": "./snippets/html.json"
+			},
+			{
+				"language": "css",
+				"path": "./snippets/css.json"
+			},
+			{
+				"language": "scss",
+				"path": "./snippets/css.json"
+			},
+			{
+				"language": "less",
+				"path": "./snippets/css.json"
+			},
+			{
+				"language": "javascript",
+				"path": "./snippets/javascript.json"
+			}
+		]
+	},
+	"scripts": {
+		"build": "node scripts/build.mjs",
+		"test": "node scripts/test.mjs",
+		"package": "npm run build && npm test && vsce package --no-dependencies",
+		"vsce:publish": "npm run build && npm test && vsce publish --no-dependencies"
+	},
+	"devDependencies": {
+		"@vscode/vsce": "^4.0.0",
+		"css-tree": "^3.2.1",
+		"html-validate": "^11.16.2"
+	}
+}

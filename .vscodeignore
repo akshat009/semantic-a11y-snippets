@@ -1,0 +1,6 @@
+src/**
+scripts/**
+node_modules/**
+.github/**
+.gitignore
+*.vsix

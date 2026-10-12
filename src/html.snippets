@@ -1,0 +1,444 @@
+=== Page & landmarks
+
+--- Semantic page :: a11y-page html5s
+Full HTML5 page: lang, viewport without zoom lock, skip link, header/nav/main/footer landmarks and one h1.
+<!DOCTYPE html>
+<html lang="${1:en}">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>${2:Page title}</title>
+  <meta name="description" content="${3:Page description}">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to main content</a>
+  <header class="site-header">
+    <a href="/" class="site-logo">${4:Site name}</a>
+    <nav aria-label="Primary">
+      <ul>
+        <li><a href="/" aria-current="page">Home</a></li>
+        <li><a href="${5:/about}">${6:About}</a></li>
+      </ul>
+    </nav>
+  </header>
+  <main id="main">
+    <h1>${7:Page heading}</h1>
+    $0
+  </main>
+  <footer class="site-footer">
+    <p><small>&copy; ${CURRENT_YEAR} ${4}</small></p>
+  </footer>
+</body>
+</html>
+
+--- Skip link :: a11y-skip
+First focusable element on the page; jumps keyboard users past repeated navigation (WCAG 2.4.1).
+<a class="skip-link" href="#${1:main}">${2:Skip to main content}</a>
+
+--- Site header :: a11y-header
+Site header landmark with a home link and labelled primary navigation.
+<header class="site-header">
+  <a href="/" class="site-logo">${1:Site name}</a>
+  <nav aria-label="${2:Primary}">
+    <ul>
+      <li><a href="/" aria-current="page">${3:Home}</a></li>
+      <li><a href="${4:/about}">${5:About}</a></li>
+    </ul>
+  </nav>
+</header>
+
+--- Navigation :: a11y-nav
+Labelled nav landmark; aria-current marks the current page.
+<nav aria-label="${1:Primary}">
+  <ul>
+    <li><a href="${2:/}" aria-current="page">${3:Home}</a></li>
+    <li><a href="${4:/about}">${5:About}</a></li>
+    <li><a href="${6:/contact}">${7:Contact}</a></li>
+  </ul>
+</nav>
+
+--- Breadcrumb :: a11y-breadcrumb
+Breadcrumb nav as an ordered list; the last item carries aria-current="page".
+<nav aria-label="Breadcrumb">
+  <ol>
+    <li><a href="/">${1:Home}</a></li>
+    <li><a href="${2:/section}">${3:Section}</a></li>
+    <li><a href="${4:/section/page}" aria-current="page">${5:Current page}</a></li>
+  </ol>
+</nav>
+
+--- Main :: a11y-main
+Main landmark with the page's single h1; id="main" is the skip link target.
+<main id="main">
+  <h1>${1:Page heading}</h1>
+  $0
+</main>
+
+--- Section :: a11y-section
+Section named by its heading, so it is exposed as a region landmark.
+<section aria-labelledby="${1:section}-title">
+  <h2 id="${1}-title">${2:Section heading}</h2>
+  $0
+</section>
+
+--- Article :: a11y-article
+Self-contained article with heading, machine-readable date and author link.
+<article>
+  <header>
+    <h2>${1:Article title}</h2>
+    <p><time datetime="${CURRENT_YEAR}-${CURRENT_MONTH}-${CURRENT_DATE}">${CURRENT_DATE} ${CURRENT_MONTH_NAME} ${CURRENT_YEAR}</time> by <a href="${2:/author}" rel="author">${3:Author name}</a></p>
+  </header>
+  <p>${4:Article content}</p>
+</article>
+
+--- Aside :: a11y-aside
+Complementary landmark named by its heading.
+<aside aria-labelledby="${1:related}-title">
+  <h2 id="${1}-title">${2:Related content}</h2>
+  $0
+</aside>
+
+--- Site footer :: a11y-footer
+Footer landmark with a labelled footer nav and accessibility statement link.
+<footer class="site-footer">
+  <nav aria-label="Footer">
+    <ul>
+      <li><a href="${1:/privacy}">${2:Privacy policy}</a></li>
+      <li><a href="${3:/accessibility}">${4:Accessibility statement}</a></li>
+    </ul>
+  </nav>
+  <p><small>&copy; ${CURRENT_YEAR} ${5:Site name}</small></p>
+</footer>
+
+--- Search :: a11y-search
+Native search landmark with a visible label and submit button.
+<search>
+  <form action="${1:/search}" method="get">
+    <label for="${2:site-search}">${3:Search the site}</label>
+    <input type="search" id="${2}" name="${4:q}">
+    <button type="submit">${5:Search}</button>
+  </form>
+</search>
+
+=== Content
+
+--- Screen-reader-only text :: a11y-sr
+Text read by screen readers but hidden visually. Needs the a11y-visually-hidden CSS.
+<span class="visually-hidden">${1:Text for screen reader users}</span>
+
+--- Image :: a11y-img
+Informative image with alt text and dimensions to prevent layout shift.
+<img src="${1:image.jpg}" alt="${2:Describe what the image shows}" width="${3:800}" height="${4:600}" loading="lazy" decoding="async">
+
+--- Decorative image :: a11y-img-deco
+Decorative image with empty alt so screen readers skip it.
+<img src="${1:decoration.svg}" alt="" width="${2:24}" height="${3:24}">
+
+--- Figure :: a11y-figure
+Image with a visible caption.
+<figure>
+  <img src="${1:image.jpg}" alt="${2:Describe what the image shows}" width="${3:800}" height="${4:600}" loading="lazy" decoding="async">
+  <figcaption>${5:Caption}</figcaption>
+</figure>
+
+--- Quote :: a11y-quote
+Blockquote with source and attribution in a figure.
+<figure>
+  <blockquote cite="${1:https://example.com/source}">
+    <p>${2:Quoted text}</p>
+  </blockquote>
+  <figcaption>${3:Author name}, <cite>${4:Source title}</cite></figcaption>
+</figure>
+
+--- Data table :: a11y-table
+Table with caption and scoped column and row headers.
+<table>
+  <caption>${1:Table caption}</caption>
+  <thead>
+    <tr>
+      <th scope="col">${2:Item}</th>
+      <th scope="col">${3:Value}</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">${4:Row heading}</th>
+      <td>${5:Data}</td>
+    </tr>
+  </tbody>
+</table>
+
+--- Description list :: a11y-dl
+Term and description pairs.
+<dl>
+  <dt>${1:Term}</dt>
+  <dd>${2:Description}</dd>
+</dl>
+
+--- Details :: a11y-details
+Native disclosure widget; keyboard and screen reader support built in, no JS.
+<details>
+  <summary>${1:Summary}</summary>
+  <p>${2:More details}</p>
+</details>
+
+--- Time :: a11y-time
+Date with a machine-readable datetime value (defaults to today).
+<time datetime="${1:${CURRENT_YEAR}-${CURRENT_MONTH}-${CURRENT_DATE}}">${2:${CURRENT_DATE} ${CURRENT_MONTH_NAME} ${CURRENT_YEAR}}</time>
+
+--- Abbreviation :: a11y-abbr
+Abbreviation with its expansion.
+<abbr title="${1:World Wide Web Consortium}">${2:W3C}</abbr>
+
+--- Language change :: a11y-lang
+Marks a phrase in another language so screen readers switch pronunciation (WCAG 3.1.2).
+<span lang="${1:fr}">${2:Bonjour}</span>
+
+--- Contact address :: a11y-address
+Contact details for the page or article owner.
+<address>
+  <a href="mailto:${1:hello@example.com}">${1}</a><br>
+  <a href="tel:${2:+910000000000}">${2}</a>
+</address>
+
+--- Card :: a11y-card
+Card with one link on the heading, so screen readers hear the link once.
+<article class="card">
+  <h3 class="card-title"><a href="${1:/post}">${2:Card title}</a></h3>
+  <p>${3:Short summary}</p>
+</article>
+
+--- New-tab link :: a11y-link-new-tab
+Link that opens a new tab and says so to screen reader users.
+<a href="${1:https://example.com}" target="_blank" rel="noopener">${2:Link text}<span class="visually-hidden"> (opens in a new tab)</span></a>
+
+--- Icon button :: a11y-icon-btn
+Icon-only button with a hidden text label and a hidden icon.
+<button type="button" class="icon-button">
+  <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" width="24" height="24"><use href="#${1:icon-close}"></use></svg>
+  <span class="visually-hidden">${2:Close}</span>
+</button>
+
+--- Decorative SVG :: a11y-svg-deco
+Inline SVG hidden from assistive tech.
+<svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" width="24" height="24">$0</svg>
+
+--- Meaningful SVG :: a11y-svg
+Inline SVG exposed as an image with an accessible name.
+<svg role="img" aria-labelledby="${1:graphic}-title" viewBox="0 0 ${2:24} ${3:24}" width="${2}" height="${3}">
+  <title id="${1}-title">${4:Describe the graphic}</title>
+  $0
+</svg>
+
+=== Media
+
+--- Video :: a11y-video
+Video with captions track, fallback download link and transcript link.
+<video controls preload="metadata" width="${1:1280}" height="${2:720}" poster="${3:poster.jpg}">
+  <source src="${4:video.mp4}" type="video/mp4">
+  <track kind="captions" src="${5:captions.en.vtt}" srclang="${6:en}" label="${7:English}" default>
+  <p>Your browser can't play this video. <a href="${4}">Download the video</a>.</p>
+</video>
+<p><a href="${8:#transcript}">Read the transcript</a></p>
+
+--- Audio :: a11y-audio
+Audio player with a title and transcript link.
+<figure>
+  <figcaption>${1:Audio title}</figcaption>
+  <audio controls preload="metadata" src="${2:audio.mp3}"></audio>
+  <p><a href="${3:#transcript}">Read the transcript</a></p>
+</figure>
+
+--- Iframe :: a11y-iframe
+Embedded frame with a descriptive title.
+<iframe src="${1:https://example.com/embed}" title="${2:Describe the embedded content}" width="${3:560}" height="${4:315}" loading="lazy" allowfullscreen></iframe>
+
+=== Forms
+
+--- Form :: a11y-form
+Form shell with instructions and an explicit submit button.
+<form action="${1:/submit}" method="${2|post,get|}">
+  <p>${3:All fields are required unless marked optional.}</p>
+  $0
+  <button type="submit">${4:Submit}</button>
+</form>
+
+--- Text input :: a11y-input
+Labelled input with hint text and autocomplete for input purpose (WCAG 1.3.5).
+<div class="field">
+  <label for="${1:full-name}">${2:Full name}</label>
+  <p id="${1}-hint" class="hint">${3:As it appears on your ID}</p>
+  <input type="${4|text,tel,url,number,date|}" id="${1}" name="${1}" autocomplete="${5|name,given-name,family-name,tel,organization,street-address,postal-code,url,off|}" aria-describedby="${1}-hint">
+</div>
+
+--- Email input :: a11y-email
+Required email field with autocomplete.
+<div class="field">
+  <label for="${1:email}">${2:Email address}</label>
+  <input type="email" id="${1}" name="${1}" autocomplete="email" spellcheck="false" required>
+</div>
+
+--- Password input :: a11y-password
+Password field with hint and correct autocomplete for password managers.
+<div class="field">
+  <label for="${1:password}">${2:Password}</label>
+  <p id="${1}-hint" class="hint">${3:Use 12 or more characters.}</p>
+  <input type="password" id="${1}" name="${1}" autocomplete="${4|current-password,new-password|}" aria-describedby="${1}-hint" required>
+</div>
+
+--- Textarea :: a11y-textarea
+Labelled multi-line text field.
+<div class="field">
+  <label for="${1:message}">${2:Message}</label>
+  <textarea id="${1}" name="${1}" rows="${3:5}"></textarea>
+</div>
+
+--- Select :: a11y-select
+Labelled select with a placeholder option.
+<div class="field">
+  <label for="${1:topic}">${2:Topic}</label>
+  <select id="${1}" name="${1}">
+    <option value="">${3:Choose a topic}</option>
+    <option value="${4:general}">${5:General question}</option>
+  </select>
+</div>
+
+--- Checkbox :: a11y-checkbox
+Single checkbox with its label after the control.
+<div class="field">
+  <input type="checkbox" id="${1:agree}" name="${1}" value="${2:yes}">
+  <label for="${1}">${3:I agree to the terms}</label>
+</div>
+
+--- Checkbox group :: a11y-checkboxes
+Related checkboxes grouped by fieldset and legend; name[] submits every checked value.
+<fieldset>
+  <legend>${1:Which topics interest you?}</legend>
+  <div>
+    <input type="checkbox" id="${2:topics}-1" name="${2}[]" value="${3:design}">
+    <label for="${2}-1">${4:Design}</label>
+  </div>
+  <div>
+    <input type="checkbox" id="${2}-2" name="${2}[]" value="${5:development}">
+    <label for="${2}-2">${6:Development}</label>
+  </div>
+</fieldset>
+
+--- Radio group :: a11y-radios
+Radio buttons grouped by fieldset and legend.
+<fieldset>
+  <legend>${1:How should we contact you?}</legend>
+  <div>
+    <input type="radio" id="${2:contact}-1" name="${2}" value="${3:email}">
+    <label for="${2}-1">${4:Email}</label>
+  </div>
+  <div>
+    <input type="radio" id="${2}-2" name="${2}" value="${5:phone}">
+    <label for="${2}-2">${6:Phone}</label>
+  </div>
+</fieldset>
+
+--- Field with error :: a11y-input-error
+Invalid field: aria-invalid plus an error message linked by aria-describedby (WCAG 3.3.1).
+<div class="field field-error">
+  <label for="${1:email}">${2:Email address}</label>
+  <p id="${1}-error" class="error-message"><span class="visually-hidden">Error:</span> ${3:Enter an email address like name@example.com}</p>
+  <input type="${4:email}" id="${1}" name="${1}" aria-invalid="true" aria-describedby="${1}-error">
+</div>
+
+--- Error summary :: a11y-error-summary
+List of errors linking to each field. Move focus here after a failed submit.
+<div class="error-summary" tabindex="-1">
+  <h2>${1:There is a problem}</h2>
+  <ul>
+    <li><a href="#${2:email}">${3:Enter an email address}</a></li>
+  </ul>
+</div>
+
+--- Progress :: a11y-progress
+Labelled progress bar with a text fallback.
+<label for="${1:upload-progress}">${2:Upload progress}</label>
+<progress id="${1}" max="100" value="${3:40}">${3}%</progress>
+
+=== Widgets & live regions
+
+--- Dialog :: a11y-dialog
+Native modal dialog opened with commandfor (no JS); focus trap and Escape built in.
+<button type="button" commandfor="${1:dialog}" command="show-modal">${2:Open dialog}</button>
+<dialog id="${1}" aria-labelledby="${1}-title">
+  <h2 id="${1}-title">${3:Dialog title}</h2>
+  <p>${4:Dialog content}</p>
+  <form method="dialog">
+    <button type="submit">${5:Close}</button>
+  </form>
+</dialog>
+
+--- Disclosure :: a11y-disclosure
+Show/hide button with aria-expanded. Pair with a11y-disclosure-js.
+<button type="button" aria-expanded="false" aria-controls="${1:more-info}">${2:Show more}</button>
+<div id="${1}" hidden>
+  <p>${3:Hidden content}</p>
+</div>
+
+--- Mobile menu toggle :: a11y-nav-toggle
+Navigation with a menu button using aria-expanded. Pair with a11y-disclosure-js.
+<nav aria-label="${1:Primary}">
+  <button type="button" aria-expanded="false" aria-controls="${2:primary-menu}">${3:Menu}</button>
+  <ul id="${2}" hidden>
+    <li><a href="/" aria-current="page">Home</a></li>
+    <li><a href="${4:/about}">${5:About}</a></li>
+  </ul>
+</nav>
+
+--- Accordion item :: a11y-accordion
+Accordion section: heading wrapping an aria-expanded button. Pair with a11y-disclosure-js.
+<div class="accordion">
+  <h3>
+    <button type="button" aria-expanded="false" aria-controls="${1:faq}-panel-1">${2:Question}</button>
+  </h3>
+  <div id="${1}-panel-1" hidden>
+    <p>${3:Answer}</p>
+  </div>
+</div>
+
+--- Tabs :: a11y-tabs
+ARIA tabs with roving tabindex. Pair with a11y-tabs-js for arrow-key support.
+<div class="tabs">
+  <div role="tablist" aria-label="${1:Product details}">
+    <button type="button" role="tab" id="${2:tab}-1" aria-selected="true" aria-controls="${2}-panel-1">${3:Overview}</button>
+    <button type="button" role="tab" id="${2}-2" aria-selected="false" aria-controls="${2}-panel-2" tabindex="-1">${4:Specs}</button>
+  </div>
+  <div role="tabpanel" id="${2}-panel-1" aria-labelledby="${2}-1" tabindex="0">
+    <p>${5:Overview content}</p>
+  </div>
+  <div role="tabpanel" id="${2}-panel-2" aria-labelledby="${2}-2" tabindex="0" hidden>
+    <p>${6:Specs content}</p>
+  </div>
+</div>
+
+--- Toggle button :: a11y-toggle
+On/off button using aria-pressed. Pair with a11y-toggle-js.
+<button type="button" aria-pressed="false">${1:Mute}</button>
+
+--- Switch :: a11y-switch
+On/off switch using role="switch". Pair with a11y-toggle-js.
+<button type="button" role="switch" aria-checked="false">${1:Dark mode}</button>
+
+--- Pagination :: a11y-pagination
+Labelled pagination with the current page marked and context for screen readers.
+<nav aria-label="${1:Pagination}">
+  <ul>
+    <li><a href="${2:?page=1}">Previous<span class="visually-hidden"> page</span></a></li>
+    <li><a href="?page=1" aria-current="page"><span class="visually-hidden">Page </span>1</a></li>
+    <li><a href="?page=2"><span class="visually-hidden">Page </span>2</a></li>
+    <li><a href="${3:?page=2}">Next<span class="visually-hidden"> page</span></a></li>
+  </ul>
+</nav>
+
+--- Status message :: a11y-status
+Polite live region (WCAG 4.1.3). Keep it in the page on load, then inject text.
+<div role="status">$0</div>
+
+--- Alert :: a11y-alert
+Assertive live region for urgent messages. Keep it in the page on load, then inject text.
+<div role="alert">$0</div>

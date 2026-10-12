@@ -1,0 +1,128 @@
+{
+	"Visually hidden class": {
+		"prefix": "a11y-visually-hidden",
+		"body": [
+			".visually-hidden:not(:focus):not(:active) {",
+			"\tclip-path: inset(50%);",
+			"\theight: 1px;",
+			"\toverflow: hidden;",
+			"\tposition: absolute;",
+			"\twhite-space: nowrap;",
+			"\twidth: 1px;",
+			"}"
+		],
+		"description": "Hides content visually but keeps it for screen readers; shows it again when focused."
+	},
+	"Skip link styles": {
+		"prefix": "a11y-skip-css",
+		"body": [
+			".skip-link {",
+			"\tbackground: ${1:#000};",
+			"\tcolor: ${2:#fff};",
+			"\tinset-block-start: 1rem;",
+			"\tinset-inline-start: 1rem;",
+			"\tpadding: 0.75rem 1rem;",
+			"\tposition: absolute;",
+			"\ttransform: translateY(-200%);",
+			"\tz-index: 100;",
+			"}",
+			"",
+			".skip-link:focus {",
+			"\ttransform: none;",
+			"}"
+		],
+		"description": "Keeps the skip link off-screen until it receives keyboard focus."
+	},
+	"Focus ring": {
+		"prefix": "a11y-focus",
+		"body": [
+			":focus-visible {",
+			"\toutline: ${1:3px} solid ${2:currentColor};",
+			"\toutline-offset: ${3:2px};",
+			"}"
+		],
+		"description": "Visible focus indicator for keyboard users only (WCAG 2.4.7)."
+	},
+	"Reduced motion": {
+		"prefix": "a11y-reduced-motion",
+		"body": [
+			"@media (prefers-reduced-motion: reduce) {",
+			"\t*,",
+			"\t*::before,",
+			"\t*::after {",
+			"\t\tanimation-duration: 0.01ms !important;",
+			"\t\tanimation-iteration-count: 1 !important;",
+			"\t\tscroll-behavior: auto !important;",
+			"\t\ttransition-duration: 0.01ms !important;",
+			"\t}",
+			"}"
+		],
+		"description": "Turns off animation and smooth scrolling for users who ask for less motion."
+	},
+	"Forced colors": {
+		"prefix": "a11y-forced-colors",
+		"body": [
+			"@media (forced-colors: active) {",
+			"\t${1:.button} {",
+			"\t\tborder: 1px solid ButtonText;",
+			"\t}",
+			"}"
+		],
+		"description": "Restores borders that Windows High Contrast mode would otherwise remove."
+	},
+	"Target size": {
+		"prefix": "a11y-target-size",
+		"body": [
+			"${1:button, [role=\"button\"], input[type=\"checkbox\"], input[type=\"radio\"]} {",
+			"\tmin-block-size: 24px;",
+			"\tmin-inline-size: 24px;",
+			"}"
+		],
+		"description": "Minimum 24 by 24 px pointer targets (WCAG 2.5.8)."
+	},
+	"Accessibility base styles": {
+		"prefix": "a11y-base-css",
+		"body": [
+			".visually-hidden:not(:focus):not(:active) {",
+			"\tclip-path: inset(50%);",
+			"\theight: 1px;",
+			"\toverflow: hidden;",
+			"\tposition: absolute;",
+			"\twhite-space: nowrap;",
+			"\twidth: 1px;",
+			"}",
+			"",
+			".skip-link {",
+			"\tbackground: ${1:#000};",
+			"\tcolor: ${2:#fff};",
+			"\tinset-block-start: 1rem;",
+			"\tinset-inline-start: 1rem;",
+			"\tpadding: 0.75rem 1rem;",
+			"\tposition: absolute;",
+			"\ttransform: translateY(-200%);",
+			"\tz-index: 100;",
+			"}",
+			"",
+			".skip-link:focus {",
+			"\ttransform: none;",
+			"}",
+			"",
+			":focus-visible {",
+			"\toutline: 3px solid currentColor;",
+			"\toutline-offset: 2px;",
+			"}",
+			"",
+			"@media (prefers-reduced-motion: reduce) {",
+			"\t*,",
+			"\t*::before,",
+			"\t*::after {",
+			"\t\tanimation-duration: 0.01ms !important;",
+			"\t\tanimation-iteration-count: 1 !important;",
+			"\t\tscroll-behavior: auto !important;",
+			"\t\ttransition-duration: 0.01ms !important;",
+			"\t}",
+			"}"
+		],
+		"description": "Visually hidden class, skip link, focus ring and reduced motion in one block."
+	}
+}

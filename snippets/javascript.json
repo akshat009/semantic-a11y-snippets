@@ -1,0 +1,60 @@
+{
+	"Disclosure script": {
+		"prefix": "a11y-disclosure-js",
+		"body": [
+			"document.querySelectorAll('button[aria-expanded][aria-controls]').forEach((button) => {",
+			"\tconst target = document.getElementById(button.getAttribute('aria-controls'));",
+			"\tif (!target) return;",
+			"\tbutton.addEventListener('click', () => {",
+			"\t\tconst expanded = button.getAttribute('aria-expanded') === 'true';",
+			"\t\tbutton.setAttribute('aria-expanded', String(!expanded));",
+			"\t\ttarget.hidden = expanded;",
+			"\t});",
+			"});"
+		],
+		"description": "Toggles aria-expanded and the controlled element for disclosures, accordions and menu buttons."
+	},
+	"Tabs script": {
+		"prefix": "a11y-tabs-js",
+		"body": [
+			"document.querySelectorAll('[role=\"tablist\"]').forEach((tablist) => {",
+			"\tconst tabs = Array.from(tablist.querySelectorAll('[role=\"tab\"]'));",
+			"\tconst select = (tab) => {",
+			"\t\ttabs.forEach((item) => {",
+			"\t\t\tconst selected = item === tab;",
+			"\t\t\titem.setAttribute('aria-selected', String(selected));",
+			"\t\t\titem.tabIndex = selected ? 0 : -1;",
+			"\t\t\tconst panel = document.getElementById(item.getAttribute('aria-controls'));",
+			"\t\t\tif (panel) panel.hidden = !selected;",
+			"\t\t});",
+			"\t\ttab.focus();",
+			"\t};",
+			"\ttablist.addEventListener('click', (event) => {",
+			"\t\tconst tab = event.target.closest('[role=\"tab\"]');",
+			"\t\tif (tab) select(tab);",
+			"\t});",
+			"\ttablist.addEventListener('keydown', (event) => {",
+			"\t\tconst index = tabs.indexOf(document.activeElement);",
+			"\t\tif (index === -1) return;",
+			"\t\tconst keys = { ArrowRight: index + 1, ArrowLeft: index - 1, Home: 0, End: tabs.length - 1 };",
+			"\t\tif (!(event.key in keys)) return;",
+			"\t\tevent.preventDefault();",
+			"\t\tselect(tabs[(keys[event.key] + tabs.length) % tabs.length]);",
+			"\t});",
+			"});"
+		],
+		"description": "Click and arrow-key/Home/End support for a11y-tabs, with roving tabindex."
+	},
+	"Toggle script": {
+		"prefix": "a11y-toggle-js",
+		"body": [
+			"document.querySelectorAll('button[aria-pressed], button[role=\"switch\"]').forEach((button) => {",
+			"\tconst attribute = button.hasAttribute('aria-pressed') ? 'aria-pressed' : 'aria-checked';",
+			"\tbutton.addEventListener('click', () => {",
+			"\t\tbutton.setAttribute(attribute, String(button.getAttribute(attribute) !== 'true'));",
+			"\t});",
+			"});"
+		],
+		"description": "Flips aria-pressed on toggle buttons and aria-checked on switches."
+	}
+}
